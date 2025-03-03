@@ -69,9 +69,6 @@ public class InventoryControl {
         }
     }
 
-
-
-
     public void addProducts(Products product) {
         try {
             productsList.add(product);
@@ -95,7 +92,7 @@ public class InventoryControl {
                 writeToFile();
             }
             else {
-                System.out.println("Produto não encontrado!");
+                System.out.println("Product not found!");
             }
         }
         catch (Exception e) {
@@ -113,7 +110,7 @@ public class InventoryControl {
                     return;
                 }
             }
-            System.out.println("Produto não encontrado!");
+            System.out.println("Product not found!");
         } catch (Exception e) {
             System.out.println("Error modifying product quantity: " + e.getMessage());
         }
@@ -129,7 +126,7 @@ public class InventoryControl {
                     return;
                 }
             }
-            System.out.println("Produto não encontrado!");
+            System.out.println("Product not found!");
         } catch (Exception e) {
             System.out.println("Error modifying product price: " + e.getMessage());
         }
@@ -142,6 +139,7 @@ public class InventoryControl {
     }
 
     public ArrayList<Products> getProductsList() {
+
         return productsList;
     }
 

@@ -16,7 +16,7 @@ public class MainWindow extends JFrame {
         inventoryControl = new InventoryControl();
 
         setTitle("StockFlow");
-        setSize(500, 400);
+        setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
@@ -94,13 +94,21 @@ public class MainWindow extends JFrame {
         int option = JOptionPane.showConfirmDialog(null, panel, "Add Product", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
             String name = nameField.getText();
-            double price = Double.parseDouble(priceField.getText());
-            int quantity = Integer.parseInt(quantityField.getText());
+            String priceText = priceField.getText();
+            String quantityText = quantityField.getText();
 
-            Products product = new Products(name, price, quantity);
-            inventoryControl.addProducts(product);
-            JOptionPane.showMessageDialog(null, "Product " + name + " added with quantity " + quantity);
+            try {
+                double price = Double.parseDouble(priceText);
+                int quantity = Integer.parseInt(quantityText);
+
+                Products product = new Products(name, price, quantity);
+                inventoryControl.addProducts(product);
+                JOptionPane.showMessageDialog(null, "Product " + name + " added with quantity " + quantity);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Please enter valid numeric values for price and quantity.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
+
     }
 
     private void removeProduct() {
@@ -144,17 +152,33 @@ public class MainWindow extends JFrame {
             String quantityText = newQuantityField.getText();
             String priceText = newPriceField.getText();
 
+            boolean updated = false;
+
             if (!quantityText.isEmpty()) {
-                int newQuantity = Integer.parseInt(quantityText);
-                inventoryControl.modifyProductQuantity(name, newQuantity);
+                try {
+                    int newQuantity = Integer.parseInt(quantityText);
+                    inventoryControl.modifyProductQuantity(name, newQuantity);
+                    updated = true;
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid numeric value for quantity.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
 
             if (!priceText.isEmpty()) {
-                double newPrice = Double.parseDouble(priceText);
-                inventoryControl.modifyProductPrice(name, newPrice);
+                try {
+                    double newPrice = Double.parseDouble(priceText);
+                    inventoryControl.modifyProductPrice(name, newPrice);
+                    updated = true;
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid numeric value for price.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
 
-            JOptionPane.showMessageDialog(null, "Product " + name + " updated.");
+            if (updated) {
+                JOptionPane.showMessageDialog(null, "Product " + name + " updated.");
+            }
+
         }
+
     }
 }
