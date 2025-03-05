@@ -32,7 +32,7 @@
 ## **Como Executar**
 
 ### **Requisitos**
-- **JDK 8 ou superior** instalado.
+- **JDK 23 instalado.
 - **IDE recomendada**: IntelliJ IDEA, Eclipse ou VS Code com plugin Java.
 
 - 1. Clone o repositório:
@@ -85,7 +85,7 @@ java -cp target/classes main.Main
 ## **How to Run**
 
 ### **Requirements**
-- **JDK 8 or higher** installed.
+- **JDK 32 installed.
 - **Recommended IDE**: IntelliJ IDEA, Eclipse, or VS Code with the Java plugin.
 
 1. **Clone the repository**:
